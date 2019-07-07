@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 
 import os
 import gettext
@@ -91,13 +91,13 @@ class application(wx.Frame):
 			self.elements['langlist'].InsertItem(i, languages[i])
 		self.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.SelectLanguage, self.elements['langlist'])
 		self.elements['langlist'].SetFocus()
-	def get_clipboard():
+	def get_clipboard(self):
 		if wx.TheClipboard.Open():
 			data = wx.TextDataObject()
 			if wx.TheClipboard.GetData(data):
 				t = data.GetText()
 		wx.TheClipboard.Close()
-	return t
+		return t
 	def NewDownloadPage(self):
 		self.ResetElements()
 		self.SetMenuBar(None)
