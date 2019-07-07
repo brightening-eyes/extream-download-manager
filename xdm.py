@@ -83,7 +83,9 @@ class application(wx.Frame):
 		#languages elements should always be first_two_letter_starting_of_a_language-actual_language_name
 		languages=['en-english', 
 		'fa-پارسی', 
-		'de-deutsche']
+		'de-deutsche',
+		'es-Spanish', 
+		'ge-georgian']
 		self.elements['cancelbutton']=wx.Button(self.firstpanel, id=BACKTODEFAULTPAGE_ID, label=_("cancel"))
 		self.elements['listlabel']=wx.StaticText(self.firstpanel, wx.ID_ANY, label=_("select a language"))
 		self.elements['langlist']=wx.ListCtrl(self.firstpanel)
@@ -102,7 +104,11 @@ class application(wx.Frame):
 		self.ResetElements()
 		self.SetMenuBar(None)
 		self.elements['addresscaption']=wx.StaticText(self.firstpanel, wx.ID_ANY, label=_("enter download link here"))
+<<<<<<< HEAD
 		self.elements['address']=wx.TextCtrl(self.firstpanel, value=self.get_clipboard())
+=======
+		self.elements['address']=wx.TextCtrl(self.firstpanel, value=self.GetClipboard())
+>>>>>>> c50f9c3067b968feffc75c0d396d848725d17629
 		self.elements['pathlabel']=wx.StaticText(self.firstpanel, wx.ID_ANY, label=_("where should this file be saved to? "))
 		self.elements['path']=wx.TextCtrl(self.firstpanel, value=os.path.expanduser("~\\downloads"))
 		self.elements['startdownloadbutton']=wx.Button(self.firstpanel, wx.ID_ANY, label=_("start download"))
@@ -206,6 +212,14 @@ class application(wx.Frame):
 	def OnQuit(self, e):
 		self.ResetElements()
 		self.Destroy()
+	def GetClipboard(self):
+		if wx.TheClipboard.Open():
+			data = wx.TextDataObject()
+			if wx.TheClipboard.GetData(data):
+				t = data.GetText()
+		wx.TheClipboard.Close()
+		return t
+
 
 
 app=wx.App()
